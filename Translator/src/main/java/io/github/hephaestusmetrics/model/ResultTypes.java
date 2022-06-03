@@ -1,4 +1,4 @@
-package main.model;
+package io.github.hephaestusmetrics.model;
 
 public enum ResultTypes {
     VECTOR,

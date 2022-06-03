@@ -1,7 +1,7 @@
-package main.model.metrics.simple;
+package io.github.hephaestusmetrics.model.metrics.simple;
 
-import main.model.ResultTypes;
-import main.model.metrics.MetricTemplate;
+import io.github.hephaestusmetrics.model.ResultTypes;
+import io.github.hephaestusmetrics.model.metrics.MetricTemplate;
 
 /**
  * Abstract class for simple metrics: STRING, SCALAR

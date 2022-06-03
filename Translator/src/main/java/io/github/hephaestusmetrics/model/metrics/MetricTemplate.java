@@ -1,6 +1,6 @@
-package main.model.metrics;
+package io.github.hephaestusmetrics.model.metrics;
 
-import main.model.ResultTypes;
+import io.github.hephaestusmetrics.model.ResultTypes;
 
 /**
  * Most generic class for metrics

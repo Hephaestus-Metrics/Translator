@@ -1,9 +1,9 @@
-package main.model.promql.simplequeries;
+package io.github.hephaestusmetrics.model.promql.simplequeries;
 
-import main.model.ResultTypes;
-import main.model.metrics.simple.ScalarMetric;
-import main.model.metrics.simple.SimpleMetricTemplate;
-import main.model.metrics.simple.StringMetric;
+import io.github.hephaestusmetrics.model.ResultTypes;
+import io.github.hephaestusmetrics.model.metrics.simple.ScalarMetric;
+import io.github.hephaestusmetrics.model.metrics.simple.SimpleMetricTemplate;
+import io.github.hephaestusmetrics.model.metrics.simple.StringMetric;
 
 import java.io.Serializable;
 import java.util.ArrayList;
