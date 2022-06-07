@@ -1,4 +1,4 @@
-package main.model.utilities;
+package io.github.hephaestusmetrics.model.utilities;
 
 /**
  * Converts [ <unix_time>, "<sample_value>" ] from string to doubles

@@ -1,7 +1,7 @@
-package main.model.promql.complexqueries;
+package io.github.hephaestusmetrics.model.promql.complexqueries;
 
-import main.model.metrics.complex.ComplexMetricTemplate;
-import main.model.promql.AbstractQueryResult;
+import io.github.hephaestusmetrics.model.metrics.complex.ComplexMetricTemplate;
+import io.github.hephaestusmetrics.model.promql.AbstractQueryResult;
 
 import java.io.Serializable;
 import java.util.ArrayList;

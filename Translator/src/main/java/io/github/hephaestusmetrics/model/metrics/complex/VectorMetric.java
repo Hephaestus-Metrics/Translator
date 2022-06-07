@@ -1,7 +1,7 @@
-package main.model.metrics.complex;
+package io.github.hephaestusmetrics.model.metrics.complex;
 
-import main.model.promql.complexqueries.ComplexMetricResult;
-import main.model.utilities.ValueConverter;
+import io.github.hephaestusmetrics.model.utilities.ValueConverter;
+import io.github.hephaestusmetrics.model.promql.complexqueries.ComplexMetricResult;
 
 import java.util.Arrays;
 

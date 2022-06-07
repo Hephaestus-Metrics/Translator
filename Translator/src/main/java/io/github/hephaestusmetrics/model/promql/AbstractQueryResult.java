@@ -1,6 +1,6 @@
-package main.model.promql;
+package io.github.hephaestusmetrics.model.promql;
 
-import main.model.metrics.MetricTemplate;
+import io.github.hephaestusmetrics.model.metrics.MetricTemplate;
 
 import java.util.ArrayList;
 

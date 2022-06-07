@@ -1,15 +1,16 @@
-package main.model.metrics.simple;
+package io.github.hephaestusmetrics.model.metrics.simple;
 
-import main.model.ResultTypes;
+import io.github.hephaestusmetrics.model.ResultTypes;
+import io.github.hephaestusmetrics.model.utilities.ValueConverter;
 
 import java.util.Arrays;
 
-public class StringMetric extends SimpleMetricTemplate {
-    private String value;
+public class ScalarMetric extends SimpleMetricTemplate {
+    private double value;
     private double timestamp;
     private final String[] stringResult;
 
-    public StringMetric(String[] result, ResultTypes resultType) {
+    public ScalarMetric(String[] result, ResultTypes resultType) {
         super(resultType);
         this.stringResult = result;
         this.getDataFromResult();
@@ -17,12 +18,9 @@ public class StringMetric extends SimpleMetricTemplate {
 
     @Override
     public void getDataFromResult() {
-        this.value = this.stringResult[1];
-        try {
-            timestamp = Double.parseDouble(this.stringResult[0]);
-        } catch (NumberFormatException e) {
-            timestamp = Double.NaN;
-        }
+        double[] converted = ValueConverter.convert(this.stringResult);
+        this.timestamp = converted[0];
+        this.value = converted[1];
     }
 
     @Override
@@ -34,7 +32,7 @@ public class StringMetric extends SimpleMetricTemplate {
                 '}';
     }
 
-    public String getValue() {
+    public double getValue() {
         return value;
     }
 

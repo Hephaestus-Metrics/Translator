@@ -1,7 +1,7 @@
-package main.model.metrics.complex;
+package io.github.hephaestusmetrics.model.metrics.complex;
 
-import main.model.metrics.MetricTemplate;
-import main.model.promql.complexqueries.ComplexMetricResult;
+import io.github.hephaestusmetrics.model.metrics.MetricTemplate;
+import io.github.hephaestusmetrics.model.promql.complexqueries.ComplexMetricResult;
 
 import java.util.Map;
 

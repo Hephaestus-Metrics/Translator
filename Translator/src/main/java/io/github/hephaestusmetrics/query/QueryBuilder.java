@@ -1,6 +1,6 @@
-package main.query;
+package io.github.hephaestusmetrics.query;
 
-import main.model.QueryInfo;
+import io.github.hephaestusmetrics.model.QueryInfo;
 
 import java.util.ArrayList;
 import java.util.List;
