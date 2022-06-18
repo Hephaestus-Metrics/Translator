@@ -2,8 +2,14 @@
 
 This Repository contains the Translator of [Hephaestus Project](https://github.com/Hephaestus-Metrics).
 
-Translator consists of Java representation of Prometheus queries results and Metrics.
+Translator consists of representation of Prometheus queries results and Metrics written in Java 16.
 
+## Maven Repository
+Translator is available on remote Maven repository with the following group id:
+
+`<groupId>io.github.hephaestus-metrics</groupId>`
+
+## Brief descritpion
 Metrics have been split into two categories each containing two subcategories.
 * Simple metrics
   * Scalar metrics
