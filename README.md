@@ -14,4 +14,10 @@ Metrics have been split into two categories each containing two subcategories.
  
 The above are representations of result metrics of queries to Prometheus. Read [PromQL Expression language data types](https://prometheus.io/docs/prometheus/latest/querying/basics/) for details.
 
+Metrics consist of:
+* `lables` - Hashmap mapping label name (string) to label value (string)
+* `value` - metric's value, type depends on metric type
+* `name` [ONLY COMPLEX METRICS] - metric's name (string)
+* `timestamps(s)` [ONLY COMPLEX METRICS] - metric's timestamp if metric's type is VectorMetric or timestamps if type is Matrix metric
+
 Please note that Translator does not contain components responsible for reading metrics from a given endpoint and mapping JSON representation to metrics object since those are dependent on user application. To see an example use of translator based on Spring Boot see [Hephaestus Demo - Metrics Adapter](https://github.com/Hephaestus-Metrics/Metrics-Adapter) and [Object mapping in Metrics Adapter](https://github.com/Hephaestus-Metrics/Metrics-Adapter/blob/main/src/main/java/com/example/droolsprototype/services/PrometheusQueryService.java).
