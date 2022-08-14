@@ -13,7 +13,7 @@ public final class ValueConverter {
         double value;
         try {
             timestamp = Double.parseDouble(valueString[0]);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             timestamp = Double.NaN;
         }
         try {
@@ -26,6 +26,8 @@ public final class ValueConverter {
             } else {
                 value = Double.NaN;
             }
+        } catch (IndexOutOfBoundsException e){
+            value = Double.NaN;
         }
         return new double[]{timestamp, value};
     }

@@ -1,53 +1,58 @@
 package io.github.hephaestusmetrics.model.metrics.simple;
 
 import io.github.hephaestusmetrics.model.ResultTypes;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class StringMetricTest {
-    @Test
-    public void normalStringMetric(){
-        //given
-        double timestamp = 1659261600; //unix timestamp 1659261600 is 2022-07-31 12:00:00
-        String value = "45";
-        String[] values = { String.valueOf(timestamp), value };
+    private final static double TIMESTAMP = 1659261600;
+    private final static String VALUE = "45";
 
-        //when
-        StringMetric stringMetric = new StringMetric(values, ResultTypes.STRING);
-
-        //then
-        assertEquals(value, stringMetric.getValue());
-        assertEquals(timestamp, stringMetric.getTimestamp(), 0.1);
-    }
+    private final static String UNPARSABLE = "12abc45";
 
     @Test
-    public void unparsableTimestamp(){
+    public void normalStringMetricTest(){
         //given
-        String unparsableTimestamp = "12abc34";
-        String value = "45";
-        String[] values = { unparsableTimestamp, value };
+        String[] values = { String.valueOf(TIMESTAMP), VALUE };
 
         //when
-        StringMetric stringMetric = new StringMetric(values, ResultTypes.STRING);
+        StringMetric stringMetric = new StringMetric(values);
 
         //then
-        assertEquals(value, stringMetric.getValue());
-        assertEquals(Double.NaN, stringMetric.getTimestamp(), 0.1);
-    }
+        assertEquals(TIMESTAMP, stringMetric.getTimestamp(), 0.1);
+        assertEquals(VALUE, stringMetric.getValue());
 
-    @Test
-    public void wrongResultType(){
-        //given
-        double timestamp = 1659261600; //unix timestamp 1659261600 is 2022-07-31 12:00:00
-        String value = "45";
-        String[] values = { String.valueOf(timestamp), value };
-
-        //when
-        StringMetric stringMetric = new StringMetric(values, ResultTypes.MATRIX);
-
-        //then
-        assertEquals(value, stringMetric.getValue());
-        assertEquals(timestamp, stringMetric.getTimestamp(), 0.1);
         assertEquals(ResultTypes.STRING, stringMetric.getType());
     }
+
+    @Test
+    public void emptyValuesArrayTest(){
+        //given
+        String[] values = {};
+
+        //when
+        StringMetric stringMetric = new StringMetric(values);
+
+        //then
+        assertEquals(0.0, stringMetric.getTimestamp(), 0.1);
+        assertNull(stringMetric.getValue());
+
+        assertEquals(ResultTypes.STRING, stringMetric.getType());
+    }
+
+    @Test
+    public void unparsableTimestampTest(){
+        //given
+        String[] values = { UNPARSABLE, VALUE };
+
+        //when
+        StringMetric stringMetric = new StringMetric(values);
+
+        //then
+        assertEquals(Double.NaN, stringMetric.getTimestamp(), 0.1);
+        assertEquals(VALUE, stringMetric.getValue());
+    }
+
 }
