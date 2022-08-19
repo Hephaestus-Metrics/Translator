@@ -16,7 +16,7 @@ public class ComplexMetricResultTest {
     ComplexMetricResult complexMetricResult;
 
     @BeforeEach
-    void setMetricResult(){
+    void setMetricResult() {
         complexMetricResult = new ComplexMetricResult();
         complexMetricResult.setMetric(new HashMap<>() {{
             put("__name__", "metricName");

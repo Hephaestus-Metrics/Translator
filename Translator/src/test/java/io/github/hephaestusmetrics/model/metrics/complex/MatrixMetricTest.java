@@ -19,14 +19,14 @@ public class MatrixMetricTest {
     private final static double VALUE2 = 70;
 
     @BeforeEach
-    void setupMetricResult(){
+    void setupMetricResult() {
         complexMetricResult = new ComplexMetricResult();
         complexMetricResult.setMetric(Collections.emptyMap());
         complexMetricResult.setResultType(ResultTypes.MATRIX);
     }
 
     @Test
-    void normalMatrixMetricTest(){
+    void normalMatrixMetricTest() {
         //given
         String[][] values = {
                 {String.valueOf(TIMESTAMP1), String.valueOf(VALUE1)},
@@ -48,7 +48,7 @@ public class MatrixMetricTest {
     }
 
     @Test
-    void emptyValuesArrayTest(){
+    void emptyValuesArrayTest() {
         //given
         String[][] values = {};
         complexMetricResult.setValues(values);

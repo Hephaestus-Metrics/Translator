@@ -5,7 +5,6 @@ import io.github.hephaestusmetrics.model.metrics.simple.SimpleMetricTemplate;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
@@ -51,14 +50,14 @@ public class SimpleDataTest {
         assertNull(metricObjects);
     }
 
-    private static Stream<ResultTypes> rightResultTypes(){
+    private static Stream<ResultTypes> rightResultTypes() {
         return Stream.of(
-          ResultTypes.SCALAR,
-          ResultTypes.STRING
+                ResultTypes.SCALAR,
+                ResultTypes.STRING
         );
     }
 
-    private static Stream<ResultTypes> wrongResultTypes(){
+    private static Stream<ResultTypes> wrongResultTypes() {
         return Stream.of(
                 ResultTypes.MATRIX,
                 ResultTypes.VECTOR

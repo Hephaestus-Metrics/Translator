@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ResultTypesTest {
     @Test
-    public void numberOfEnumTypes(){
+    public void numberOfEnumTypes() {
         //given
         ResultTypes[] resultTypes = ResultTypes.values();
 
@@ -22,7 +22,7 @@ public class ResultTypesTest {
     }
 
     @Test
-    public void enumTypes(){
+    public void enumTypes() {
         //given
         List<ResultTypes> resultTypes = Arrays.asList(ResultTypes.values());
 

@@ -13,9 +13,9 @@ public class StringMetricTest {
     private final static String UNPARSABLE = "12abc45";
 
     @Test
-    public void normalStringMetricTest(){
+    public void normalStringMetricTest() {
         //given
-        String[] values = { String.valueOf(TIMESTAMP), VALUE };
+        String[] values = {String.valueOf(TIMESTAMP), VALUE};
 
         //when
         StringMetric stringMetric = new StringMetric(values);
@@ -28,7 +28,7 @@ public class StringMetricTest {
     }
 
     @Test
-    public void emptyValuesArrayTest(){
+    public void emptyValuesArrayTest() {
         //given
         String[] values = {};
 
@@ -43,9 +43,9 @@ public class StringMetricTest {
     }
 
     @Test
-    public void unparsableTimestampTest(){
+    public void unparsableTimestampTest() {
         //given
-        String[] values = { UNPARSABLE, VALUE };
+        String[] values = {UNPARSABLE, VALUE};
 
         //when
         StringMetric stringMetric = new StringMetric(values);

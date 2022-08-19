@@ -16,14 +16,14 @@ public class VectorMetricTest {
     private final static double VALUE = 45;
 
     @BeforeEach
-    void setupMetricResult(){
+    void setupMetricResult() {
         complexMetricResult = new ComplexMetricResult();
         complexMetricResult.setMetric(Collections.emptyMap());
         complexMetricResult.setResultType(ResultTypes.VECTOR);
     }
 
     @Test
-    void normalVectorMetricTest(){
+    void normalVectorMetricTest() {
         //given
         String[] value = {
                 String.valueOf(TIMESTAMP), String.valueOf(VALUE)
@@ -41,7 +41,7 @@ public class VectorMetricTest {
     }
 
     @Test
-    void emptyValueArrayTest(){
+    void emptyValueArrayTest() {
         //given
         String[] value = {};
         complexMetricResult.setValue(value);
