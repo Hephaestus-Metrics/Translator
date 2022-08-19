@@ -11,9 +11,9 @@ public class ValueConverterTest {
     private final static String UNPARSABLE = "12abc45";
 
     @Test
-    public void normalConvertTest(){
+    public void normalConvertTest() {
         //given
-        String[] values = { String.valueOf(TIMESTAMP), String.valueOf(VALUE) };
+        String[] values = {String.valueOf(TIMESTAMP), String.valueOf(VALUE)};
 
         //when
         double[] convertedValues = ValueConverter.convert(values);
@@ -24,9 +24,9 @@ public class ValueConverterTest {
     }
 
     @Test
-    public void unparsableTimestampTest(){
+    public void unparsableTimestampTest() {
         //given
-        String[] values = { UNPARSABLE, String.valueOf(VALUE) };
+        String[] values = {UNPARSABLE, String.valueOf(VALUE)};
 
         //when
         double[] convertedValues = ValueConverter.convert(values);
@@ -37,9 +37,9 @@ public class ValueConverterTest {
     }
 
     @Test
-    public void unparsableValueTest(){
+    public void unparsableValueTest() {
         //given
-        String[] values = { String.valueOf(TIMESTAMP), UNPARSABLE };
+        String[] values = {String.valueOf(TIMESTAMP), UNPARSABLE};
 
         //when
         double[] convertedValues = ValueConverter.convert(values);
@@ -50,9 +50,9 @@ public class ValueConverterTest {
     }
 
     @Test
-    public void unparsableTimestampAndValueTest(){
+    public void unparsableTimestampAndValueTest() {
         //given
-        String[] values = { UNPARSABLE, UNPARSABLE };
+        String[] values = {UNPARSABLE, UNPARSABLE};
 
         //when
         double[] convertedValues = ValueConverter.convert(values);
@@ -63,9 +63,9 @@ public class ValueConverterTest {
     }
 
     @Test
-    public void positiveInfinityValueTest(){
+    public void positiveInfinityValueTest() {
         //given
-        String[] values = { String.valueOf(TIMESTAMP), "inf" };
+        String[] values = {String.valueOf(TIMESTAMP), "inf"};
 
         //when
         double[] convertedValues = ValueConverter.convert(values);
@@ -76,9 +76,9 @@ public class ValueConverterTest {
     }
 
     @Test
-    public void negativeInfinityValueTest(){
+    public void negativeInfinityValueTest() {
         //given
-        String[] values = { String.valueOf(TIMESTAMP), "-inf" };
+        String[] values = {String.valueOf(TIMESTAMP), "-inf"};
 
         //when
         double[] convertedValues = ValueConverter.convert(values);
@@ -89,7 +89,7 @@ public class ValueConverterTest {
     }
 
     @Test
-    public void emptyValuesArrayTest(){
+    public void emptyValuesArrayTest() {
         //given
         String[] values = {};
 

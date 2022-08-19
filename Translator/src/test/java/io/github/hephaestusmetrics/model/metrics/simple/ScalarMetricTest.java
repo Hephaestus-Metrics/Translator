@@ -10,9 +10,9 @@ public class ScalarMetricTest {
     private final static double VALUE = 45;
 
     @Test
-    public void normalScalarMetricTest(){
+    public void normalScalarMetricTest() {
         //given
-        String[] values = { String.valueOf(TIMESTAMP), String.valueOf(VALUE) };
+        String[] values = {String.valueOf(TIMESTAMP), String.valueOf(VALUE)};
 
         //when
         ScalarMetric scalarMetric = new ScalarMetric(values);
@@ -25,7 +25,7 @@ public class ScalarMetricTest {
     }
 
     @Test
-    public void emptyValuesArrayTest(){
+    public void emptyValuesArrayTest() {
         //given
         String[] values = {};
 
