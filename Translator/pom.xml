@@ -121,6 +121,8 @@
         </profile>
     </profiles>
 
+    <!-- Disabled due to issues with kie workbench -->
+    <!-- uncomment before calling mvn deploy to deploy to central repository -->
     <!-- <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
