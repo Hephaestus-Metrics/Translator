@@ -17,7 +17,7 @@ public class StringMetric extends SimpleMetricTemplate {
 
     @Override
     public void getDataFromResult() {
-        if (stringResult.length > 0){
+        if (stringResult.length > 1){
             this.value = this.stringResult[1];
             try {
                 timestamp = Double.parseDouble(this.stringResult[0]);
