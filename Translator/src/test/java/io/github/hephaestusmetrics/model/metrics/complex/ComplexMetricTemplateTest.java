@@ -26,9 +26,6 @@ public class ComplexMetricTemplateTest {
 
     @Test
     void complexMetricNameTest() {
-        //given
-        //nothing to do
-
         //when
         VectorMetric vectorMetric = new VectorMetric(complexMetricResult);
 
@@ -38,9 +35,6 @@ public class ComplexMetricTemplateTest {
 
     @Test
     void complexMetricLabelsTest() {
-        //given
-        //nothing to do
-
         //when
         VectorMetric vectorMetric = new VectorMetric(complexMetricResult);
         Map<String, String> labels = vectorMetric.getLabels();
