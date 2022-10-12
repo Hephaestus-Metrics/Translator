@@ -9,19 +9,21 @@ public class StringMetric extends SimpleMetricTemplate {
     private double timestamp;
     private final String[] stringResult;
 
-    public StringMetric(String[] result, ResultTypes resultType) {
-        super(resultType);
+    public StringMetric(String[] result) {
+        super(ResultTypes.STRING);
         this.stringResult = result;
         this.getDataFromResult();
     }
 
     @Override
     public void getDataFromResult() {
-        this.value = this.stringResult[1];
-        try {
-            timestamp = Double.parseDouble(this.stringResult[0]);
-        } catch (NumberFormatException e) {
-            timestamp = Double.NaN;
+        if (stringResult.length > 1){
+            this.value = this.stringResult[1];
+            try {
+                timestamp = Double.parseDouble(this.stringResult[0]);
+            } catch (NumberFormatException e) {
+                timestamp = Double.NaN;
+            }
         }
     }
 

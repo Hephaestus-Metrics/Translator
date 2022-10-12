@@ -50,9 +50,9 @@ public class SimpleData implements Serializable {
     public ArrayList<SimpleMetricTemplate> getMetricObjects() {
         switch (resultType) {
             case STRING:
-                return new ArrayList<>(List.of(new StringMetric(result, resultType)));
+                return new ArrayList<>(List.of(new StringMetric(result)));
             case SCALAR:
-                return new ArrayList<>(List.of(new ScalarMetric(result, resultType)));
+                return new ArrayList<>(List.of(new ScalarMetric(result)));
             default:
                 break;
 

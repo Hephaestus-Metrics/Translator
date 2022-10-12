@@ -10,8 +10,8 @@ public class ScalarMetric extends SimpleMetricTemplate {
     private double timestamp;
     private final String[] stringResult;
 
-    public ScalarMetric(String[] result, ResultTypes resultType) {
-        super(resultType);
+    public ScalarMetric(String[] result) {
+        super(ResultTypes.SCALAR);
         this.stringResult = result;
         this.getDataFromResult();
     }
