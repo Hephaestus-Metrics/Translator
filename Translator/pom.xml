@@ -54,8 +54,8 @@
     </scm>
 
     <properties>
-        <maven.compiler.source>16</maven.compiler.source>
-        <maven.compiler.target>16</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -121,7 +121,9 @@
         </profile>
     </profiles>
 
-    <distributionManagement>
+    <!-- Disabled due to issues with kie workbench -->
+    <!-- uncomment before calling mvn deploy to deploy to central repository -->
+    <!-- <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
@@ -130,7 +132,7 @@
             <id>ossrh</id>
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
-    </distributionManagement>
+    </distributionManagement> -->
 
     <dependencies>
         <dependency>
