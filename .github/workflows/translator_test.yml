@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: mvn -B package --file ./Translator/pom.xml
     - name: Test
-      run: mvn test
+      run: mvn test --file ./Translator/pom.xml
