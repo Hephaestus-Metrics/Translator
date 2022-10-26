@@ -19,5 +19,7 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-    - name: Build with Maven
+    - name: Build
       run: mvn -B package --file ./Translator/pom.xml
+    - name: Test
+      run: mvn test
