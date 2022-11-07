@@ -6,12 +6,12 @@ import java.util.Map;
 
 public class Metric {
 
-    private final String queryTag;
-    private final ResultType resultType;
-    private final Map<String, String> labels;
-    private final double timestamp;
-    private final String valueString;
-    private final Double parsed;
+    public final String queryTag;
+    public final ResultType resultType;
+    public final Map<String, String> labels;
+    public final double timestamp;
+    public final String valueString;
+    public final Double value;
 
     public Metric(String queryTag, ResultType resultType, Map<String, String> labels, double timestamp, String valueString) {
         this.queryTag = queryTag;
@@ -19,7 +19,7 @@ public class Metric {
         this.labels = labels;
         this.timestamp = timestamp;
         this.valueString = valueString;
-        this.parsed = parseOrNull(valueString);
+        this.value = parseOrNull(valueString);
     }
 
     public Metric(String queryTag, ResultType resultType, Map<String, String> labels, double timestamp, Double value) {
@@ -28,7 +28,7 @@ public class Metric {
         this.labels = labels;
         this.timestamp = timestamp;
         this.valueString = value.toString();
-        this.parsed = value;
+        this.value = value;
     }
 
     private static Double parseOrNull(String s) {
@@ -56,7 +56,7 @@ public class Metric {
     }
 
     public double getValue() {
-        return parsed;
+        return value;
     }
 
     public String getValueString() {
