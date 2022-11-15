@@ -10,7 +10,7 @@ public class VectorQueryResult extends AbstractQueryResult {
     private final List<Metric> metrics;
 
     public VectorQueryResult(String tag, List<Metric> metrics) {
-        super(ResultType.STRING, tag);
+        super(ResultType.VECTOR, tag);
         this.metrics = metrics;
     }
 

@@ -11,7 +11,7 @@ public class MatrixQueryResult extends AbstractQueryResult {
     private final List<List<Metric>> metrics;
 
     public MatrixQueryResult(String tag, List<List<Metric>> metrics) {
-        super(ResultType.STRING, tag);
+        super(ResultType.MATRIX, tag);
         this.metrics = metrics;
     }
 
