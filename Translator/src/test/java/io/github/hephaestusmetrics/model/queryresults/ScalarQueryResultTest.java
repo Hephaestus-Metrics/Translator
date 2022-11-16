@@ -7,20 +7,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class ScalarQueryResultTest {
+    private static final String TAG = "TAG";
+    private static final Double TIMESTAMP = 1659261600D;
+
     @Test
     public void sanityTestWithStringValue() {
         //given
-        String tag = "TAG";
-        Double timestamp = 1659261600D;
         String stringValue = "125";
 
         //when
-        ScalarQueryResult scalarQueryResult = new ScalarQueryResult(tag, timestamp, stringValue);
+        ScalarQueryResult scalarQueryResult = new ScalarQueryResult(TAG, TIMESTAMP, stringValue);
 
         //then
-        assertEquals(tag, scalarQueryResult.getTag());
-        assertEquals(tag, scalarQueryResult.get().getQueryTag());
-        assertEquals(timestamp, scalarQueryResult.get().getTimestamp());
+        assertEquals(TAG, scalarQueryResult.getTag());
+        assertEquals(TAG, scalarQueryResult.get().getQueryTag());
+        assertEquals(TIMESTAMP, scalarQueryResult.get().getTimestamp());
         assertEquals(stringValue, scalarQueryResult.get().getValueString());
         assertEquals(Double.parseDouble(stringValue), scalarQueryResult.get().getValue());
         assertEquals(ResultType.SCALAR, scalarQueryResult.get().getResultType());
@@ -30,17 +31,15 @@ public class ScalarQueryResultTest {
     @Test
     public void sanityTestWithDoubleValue() {
         //given
-        String tag = "TAG";
-        Double timestamp = 1659261600D;
         Double doubleValue = 125D;
 
         //when
-        ScalarQueryResult scalarQueryResult = new ScalarQueryResult(tag, timestamp, doubleValue);
+        ScalarQueryResult scalarQueryResult = new ScalarQueryResult(TAG, TIMESTAMP, doubleValue);
 
         //then
-        assertEquals(tag, scalarQueryResult.getTag());
-        assertEquals(tag, scalarQueryResult.get().getQueryTag());
-        assertEquals(timestamp, scalarQueryResult.get().getTimestamp());
+        assertEquals(TAG, scalarQueryResult.getTag());
+        assertEquals(TAG, scalarQueryResult.get().getQueryTag());
+        assertEquals(TIMESTAMP, scalarQueryResult.get().getTimestamp());
         assertEquals(doubleValue.toString(), scalarQueryResult.get().getValueString());
         assertEquals(doubleValue, scalarQueryResult.get().getValue());
         assertEquals(ResultType.SCALAR, scalarQueryResult.get().getResultType());
