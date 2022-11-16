@@ -14,7 +14,7 @@ public class MetricTest {
     private static final Map<String, String> LABELS = new HashMap<>(){{
         put("LABEL1", "VALUE1");
     }};
-    private static final double TIMESTAMP = 1659261600;
+    private static final Double TIMESTAMP = 1659261600D;
 
     @Test
     public void sanityTestWithDoubleValue() {
