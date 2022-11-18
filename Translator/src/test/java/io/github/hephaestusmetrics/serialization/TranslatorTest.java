@@ -29,8 +29,17 @@ public class TranslatorTest {
     private static String METRIC = "";
     private static String JSON_STRING = "";
 
+    private static final String SCALAR_TYPE = "scalar";
+    private static final String SCALAR_VALUE = "[125, \"15\"]";
+
+    private static final String STRING_TYPE = "string";
+    private static final String STRING_VALUE = "[125, \"15\"]";
+
     private static final String VECTOR_TYPE = "vector";
     private static final String VECTOR_VALUE = "[125,\"15\"]";
+
+    private static final String MATRIX_TYPE = "matrix";
+    private static final String MATRIX_VALUE = "[[125, \"15\"],[260, \"81\"]]";
 
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
@@ -142,7 +151,10 @@ public class TranslatorTest {
 
         private Stream<Arguments> resultTypesSource() {
             return Stream.of(
-                    Arguments.of(VECTOR_TYPE, VECTOR_VALUE)
+                    Arguments.of(SCALAR_TYPE, SCALAR_VALUE),
+                    Arguments.of(STRING_TYPE, STRING_VALUE),
+                    Arguments.of(VECTOR_TYPE, VECTOR_VALUE),
+                    Arguments.of(MATRIX_TYPE, MATRIX_VALUE)
             );
         }
     }
@@ -197,7 +209,13 @@ public class TranslatorTest {
 
     private void prepareStrings(String resultType, String value) {
         RESULT_TYPE = ResultType.fromString(resultType);
-        RESULT = "[{\"metric\":{}, \"value\":" + value + "}]";
+        if (RESULT_TYPE == ResultType.SCALAR || RESULT_TYPE == ResultType.STRING) {
+            RESULT = value;
+        } else if (RESULT_TYPE == ResultType.VECTOR) {
+            RESULT = "[{\"metric\":{}, \"value\":" + value + "}]";
+        } else if (RESULT_TYPE == ResultType.MATRIX) {
+            RESULT = "[{\"metric\":{}, \"values\":" + value + "}]";
+        }
         METRIC = "{\"data\":{\"resultType\":\"" + resultType + "\",\"result\":" + RESULT + "}}";
         JSON_STRING = "{\"tag\":\"" + TAG + "\",\"metric\":" + METRIC + "}";
     }
