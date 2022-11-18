@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TranslatorTest {
     private final Translator translator = new Translator();
@@ -27,17 +27,23 @@ public class TranslatorTest {
     private static String METRIC = "";
     private static String JSON_STRING = "";
 
+    private static final String TIMESTAMP1 = "125";
+    private static final String VALUE1 = "15";
+
+    private static final String TIMESTAMP2 = "260";
+    private static final String VALUE2 = "81";
+
     private static final String SCALAR_TYPE = "scalar";
-    private static final String SCALAR_VALUE = "[125, \"15\"]";
+    private static final String SCALAR_VALUE = "[" + TIMESTAMP1 + ", \"" + VALUE1 + "\"]";
 
     private static final String STRING_TYPE = "string";
-    private static final String STRING_VALUE = "[125, \"15\"]";
+    private static final String STRING_VALUE = "[" + TIMESTAMP1 + ", \"" + VALUE1 + "\"]";
 
     private static final String VECTOR_TYPE = "vector";
-    private static final String VECTOR_VALUE = "[125,\"15\"]";
+    private static final String VECTOR_VALUE = "[" + TIMESTAMP1 + ", \"" + VALUE1 + "\"]";
 
     private static final String MATRIX_TYPE = "matrix";
-    private static final String MATRIX_VALUE = "[[125, \"15\"],[260, \"81\"]]";
+    private static final String MATRIX_VALUE = "[[" + TIMESTAMP1 + ", \"" + VALUE1 + "\"],[" + TIMESTAMP2 + ", \"" + VALUE2 + "\"]]";
 
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
@@ -171,8 +177,7 @@ public class TranslatorTest {
             ScalarQueryResult scalarQueryResult = translator.parseScalarResult(JSON_STRING);
 
             //then
-            assertEquals(RESULT_TYPE, scalarQueryResult.getType());
-            assertEquals(TAG, scalarQueryResult.getTag());
+            assertScalarQueryResult(scalarQueryResult);
         }
 
         @Test
@@ -184,8 +189,7 @@ public class TranslatorTest {
             ScalarQueryResult scalarQueryResult = translator.parseScalarResult(rawQueryResult);
 
             //then
-            assertEquals(RESULT_TYPE, scalarQueryResult.getType());
-            assertEquals(TAG, scalarQueryResult.getTag());
+            assertScalarQueryResult(scalarQueryResult);
         }
 
         @Test
@@ -197,8 +201,18 @@ public class TranslatorTest {
             ScalarQueryResult scalarQueryResult = translator.parseScalarResult(partialQueryResult);
 
             //then
+            assertScalarQueryResult(scalarQueryResult);
+        }
+
+        private void assertScalarQueryResult(ScalarQueryResult scalarQueryResult) {
             assertEquals(RESULT_TYPE, scalarQueryResult.getType());
             assertEquals(TAG, scalarQueryResult.getTag());
+            assertEquals(RESULT_TYPE, scalarQueryResult.get().getResultType());
+            assertEquals(TAG, scalarQueryResult.get().getQueryTag());
+            assertNull(scalarQueryResult.get().getLabels());
+            assertEquals(Double.parseDouble(TIMESTAMP1), scalarQueryResult.get().getTimestamp());
+            assertEquals(Double.parseDouble(VALUE1), scalarQueryResult.get().getValue());
+            assertEquals(VALUE1, scalarQueryResult.get().getValueString());
         }
     }
 
@@ -216,8 +230,7 @@ public class TranslatorTest {
             StringQueryResult stringQueryResult = translator.parseStringResult(JSON_STRING);
 
             //then
-            assertEquals(RESULT_TYPE, stringQueryResult.getType());
-            assertEquals(TAG, stringQueryResult.getTag());
+            assertStringQueryResult(stringQueryResult);
         }
 
         @Test
@@ -229,8 +242,7 @@ public class TranslatorTest {
             StringQueryResult stringQueryResult = translator.parseStringResult(rawQueryResult);
 
             //then
-            assertEquals(RESULT_TYPE, stringQueryResult.getType());
-            assertEquals(TAG, stringQueryResult.getTag());
+            assertStringQueryResult(stringQueryResult);
         }
 
         @Test
@@ -242,8 +254,18 @@ public class TranslatorTest {
             StringQueryResult stringQueryResult = translator.parseStringResult(partialQueryResult);
 
             //then
+            assertStringQueryResult(stringQueryResult);
+        }
+
+        private void assertStringQueryResult(StringQueryResult stringQueryResult) {
             assertEquals(RESULT_TYPE, stringQueryResult.getType());
             assertEquals(TAG, stringQueryResult.getTag());
+            assertEquals(RESULT_TYPE, stringQueryResult.get().getResultType());
+            assertEquals(TAG, stringQueryResult.get().getQueryTag());
+            assertNull(stringQueryResult.get().getLabels());
+            assertEquals(Double.parseDouble(TIMESTAMP1), stringQueryResult.get().getTimestamp());
+            assertEquals(Double.parseDouble(VALUE1), stringQueryResult.get().getValue());
+            assertEquals(VALUE1, stringQueryResult.get().getValueString());
         }
     }
 
@@ -261,9 +283,7 @@ public class TranslatorTest {
             VectorQueryResult vectorQueryResult = translator.parseVectorResult(JSON_STRING);
 
             //then
-            assertEquals(RESULT_TYPE, vectorQueryResult.getType());
-            assertEquals(TAG, vectorQueryResult.getTag());
-            assertEquals(1, vectorQueryResult.getSize());
+            assertVectorQueryResult(vectorQueryResult);
         }
 
         @Test
@@ -275,9 +295,7 @@ public class TranslatorTest {
             VectorQueryResult vectorQueryResult = translator.parseVectorResult(rawQueryResult);
 
             //then
-            assertEquals(RESULT_TYPE, vectorQueryResult.getType());
-            assertEquals(TAG, vectorQueryResult.getTag());
-            assertEquals(1, vectorQueryResult.getSize());
+            assertVectorQueryResult(vectorQueryResult);
         }
 
         @Test
@@ -289,12 +307,22 @@ public class TranslatorTest {
             VectorQueryResult vectorQueryResult = translator.parseVectorResult(partialQueryResult);
 
             //then
+            assertVectorQueryResult(vectorQueryResult);
+        }
+
+        private void assertVectorQueryResult(VectorQueryResult vectorQueryResult) {
             assertEquals(RESULT_TYPE, vectorQueryResult.getType());
             assertEquals(TAG, vectorQueryResult.getTag());
+            assertEquals(RESULT_TYPE, vectorQueryResult.get(0).getResultType());
+            assertEquals(TAG, vectorQueryResult.get(0).getQueryTag());
+            assertTrue(vectorQueryResult.get(0).getLabels().isEmpty());
             assertEquals(1, vectorQueryResult.getSize());
+            assertEquals(Double.parseDouble(TIMESTAMP1), vectorQueryResult.get(0).getTimestamp());
+            assertEquals(Double.parseDouble(VALUE1), vectorQueryResult.get(0).getValue());
+            assertEquals(VALUE1, vectorQueryResult.get(0).getValueString());
         }
     }
-    
+
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
     class ParseMatrixResultTests {
@@ -309,9 +337,7 @@ public class TranslatorTest {
             MatrixQueryResult matrixQueryResult = translator.parseMatrixResult(JSON_STRING);
 
             //then
-            assertEquals(RESULT_TYPE, matrixQueryResult.getType());
-            assertEquals(TAG, matrixQueryResult.getTag());
-            assertEquals(1, matrixQueryResult.getSize());
+            assertMatrixQueryResult(matrixQueryResult);
         }
 
         @Test
@@ -323,9 +349,7 @@ public class TranslatorTest {
             MatrixQueryResult matrixQueryResult = translator.parseMatrixResult(rawQueryResult);
 
             //then
-            assertEquals(RESULT_TYPE, matrixQueryResult.getType());
-            assertEquals(TAG, matrixQueryResult.getTag());
-            assertEquals(1, matrixQueryResult.getSize());
+            assertMatrixQueryResult(matrixQueryResult);
         }
 
         @Test
@@ -337,9 +361,22 @@ public class TranslatorTest {
             MatrixQueryResult matrixQueryResult = translator.parseMatrixResult(partialQueryResult);
 
             //then
+            assertMatrixQueryResult(matrixQueryResult);
+        }
+
+        private void assertMatrixQueryResult(MatrixQueryResult matrixQueryResult) {
             assertEquals(RESULT_TYPE, matrixQueryResult.getType());
             assertEquals(TAG, matrixQueryResult.getTag());
+            assertEquals(RESULT_TYPE, matrixQueryResult.get(0).get(0).getResultType());
+            assertEquals(TAG, matrixQueryResult.get(0).get(0).getQueryTag());
+            assertTrue(matrixQueryResult.get(0).get(0).getLabels().isEmpty());
             assertEquals(1, matrixQueryResult.getSize());
+            assertEquals(Double.parseDouble(TIMESTAMP1), matrixQueryResult.get(0).get(0).getTimestamp());
+            assertEquals(Double.parseDouble(VALUE1), matrixQueryResult.get(0).get(0).getValue());
+            assertEquals(VALUE1, matrixQueryResult.get(0).get(0).getValueString());
+            assertEquals(Double.parseDouble(TIMESTAMP2), matrixQueryResult.get(0).get(1).getTimestamp());
+            assertEquals(Double.parseDouble(VALUE2), matrixQueryResult.get(0).get(1).getValue());
+            assertEquals(VALUE2, matrixQueryResult.get(0).get(1).getValueString());
         }
     }
 
