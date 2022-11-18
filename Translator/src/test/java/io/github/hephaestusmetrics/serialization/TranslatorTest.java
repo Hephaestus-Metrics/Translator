@@ -4,9 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.github.hephaestusmetrics.model.ResultType;
-import io.github.hephaestusmetrics.model.queryresults.AbstractQueryResult;
-import io.github.hephaestusmetrics.model.queryresults.RawQueryResult;
-import io.github.hephaestusmetrics.model.queryresults.VectorQueryResult;
+import io.github.hephaestusmetrics.model.queryresults.*;
 import io.github.hephaestusmetrics.serialization.model.PartialQueryResult;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
@@ -158,7 +156,97 @@ public class TranslatorTest {
             );
         }
     }
-    
+
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    @Nested
+    class ParseScalarResultTests {
+        @BeforeAll
+        void prepareNestedStrings() {
+            prepareStrings(SCALAR_TYPE, SCALAR_VALUE);
+        }
+
+        @Test
+        void parseScalarResultRawMetricStringTest() {
+            //when
+            ScalarQueryResult scalarQueryResult = translator.parseScalarResult(JSON_STRING);
+
+            //then
+            assertEquals(RESULT_TYPE, scalarQueryResult.getType());
+            assertEquals(TAG, scalarQueryResult.getTag());
+        }
+
+        @Test
+        void parseScalarResultRawQueryResultTest() {
+            //given
+            RawQueryResult rawQueryResult = new RawQueryResult(TAG, METRIC);
+
+            //when
+            ScalarQueryResult scalarQueryResult = translator.parseScalarResult(rawQueryResult);
+
+            //then
+            assertEquals(RESULT_TYPE, scalarQueryResult.getType());
+            assertEquals(TAG, scalarQueryResult.getTag());
+        }
+
+        @Test
+        void parseScalarResultPartialQueryResult() throws JsonProcessingException {
+            //given
+            PartialQueryResult partialQueryResult = new PartialQueryResult(TAG, RESULT_TYPE, (ArrayNode) mapper.readTree(RESULT));
+
+            //when
+            ScalarQueryResult scalarQueryResult = translator.parseScalarResult(partialQueryResult);
+
+            //then
+            assertEquals(RESULT_TYPE, scalarQueryResult.getType());
+            assertEquals(TAG, scalarQueryResult.getTag());
+        }
+    }
+
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    @Nested
+    class ParseStringResultTests {
+        @BeforeAll
+        void prepareNestedStrings() {
+            prepareStrings(STRING_TYPE, STRING_VALUE);
+        }
+
+        @Test
+        void parseStringResultRawMetricStringTest() {
+            //when
+            StringQueryResult stringQueryResult = translator.parseStringResult(JSON_STRING);
+
+            //then
+            assertEquals(RESULT_TYPE, stringQueryResult.getType());
+            assertEquals(TAG, stringQueryResult.getTag());
+        }
+
+        @Test
+        void parseStringResultRawQueryResultTest() {
+            //given
+            RawQueryResult rawQueryResult = new RawQueryResult(TAG, METRIC);
+
+            //when
+            StringQueryResult stringQueryResult = translator.parseStringResult(rawQueryResult);
+
+            //then
+            assertEquals(RESULT_TYPE, stringQueryResult.getType());
+            assertEquals(TAG, stringQueryResult.getTag());
+        }
+
+        @Test
+        void parseStringResultPartialQueryResult() throws JsonProcessingException {
+            //given
+            PartialQueryResult partialQueryResult = new PartialQueryResult(TAG, RESULT_TYPE, (ArrayNode) mapper.readTree(RESULT));
+
+            //when
+            StringQueryResult stringQueryResult = translator.parseStringResult(partialQueryResult);
+
+            //then
+            assertEquals(RESULT_TYPE, stringQueryResult.getType());
+            assertEquals(TAG, stringQueryResult.getTag());
+        }
+    }
+
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @Nested
     class ParseVectorResultTests {
@@ -204,6 +292,54 @@ public class TranslatorTest {
             assertEquals(RESULT_TYPE, vectorQueryResult.getType());
             assertEquals(TAG, vectorQueryResult.getTag());
             assertEquals(1, vectorQueryResult.getSize());
+        }
+    }
+    
+    @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+    @Nested
+    class ParseMatrixResultTests {
+        @BeforeAll
+        void prepareNestedStrings() {
+            prepareStrings(MATRIX_TYPE, MATRIX_VALUE);
+        }
+
+        @Test
+        void parseMatrixResultRawMetricStringTest() {
+            //when
+            MatrixQueryResult matrixQueryResult = translator.parseMatrixResult(JSON_STRING);
+
+            //then
+            assertEquals(RESULT_TYPE, matrixQueryResult.getType());
+            assertEquals(TAG, matrixQueryResult.getTag());
+            assertEquals(1, matrixQueryResult.getSize());
+        }
+
+        @Test
+        void parseMatrixResultRawQueryResultTest() {
+            //given
+            RawQueryResult rawQueryResult = new RawQueryResult(TAG, METRIC);
+
+            //when
+            MatrixQueryResult matrixQueryResult = translator.parseMatrixResult(rawQueryResult);
+
+            //then
+            assertEquals(RESULT_TYPE, matrixQueryResult.getType());
+            assertEquals(TAG, matrixQueryResult.getTag());
+            assertEquals(1, matrixQueryResult.getSize());
+        }
+
+        @Test
+        void parseMatrixResultPartialQueryResult() throws JsonProcessingException {
+            //given
+            PartialQueryResult partialQueryResult = new PartialQueryResult(TAG, RESULT_TYPE, (ArrayNode) mapper.readTree(RESULT));
+
+            //when
+            MatrixQueryResult matrixQueryResult = translator.parseMatrixResult(partialQueryResult);
+
+            //then
+            assertEquals(RESULT_TYPE, matrixQueryResult.getType());
+            assertEquals(TAG, matrixQueryResult.getTag());
+            assertEquals(1, matrixQueryResult.getSize());
         }
     }
 
