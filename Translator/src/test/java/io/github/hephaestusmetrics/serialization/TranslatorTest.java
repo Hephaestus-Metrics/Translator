@@ -58,9 +58,7 @@ public class TranslatorTest {
             PartialQueryResult partialQueryResult = translator.partiallyDeserialize(JSON_STRING);
 
             //then
-            assertEquals(RESULT_TYPE, partialQueryResult.getType());
-            assertEquals(TAG, partialQueryResult.getTag());
-            assertEquals(mapper.readTree(RESULT), partialQueryResult.getResult());
+            assertPartialQueryResult(partialQueryResult);
         }
 
         @ParameterizedTest
@@ -74,9 +72,7 @@ public class TranslatorTest {
             PartialQueryResult partialQueryResult = translator.partiallyDeserialize(rawQueryResult);
 
             //then
-            assertEquals(ResultType.fromString(resultType), partialQueryResult.getType());
-            assertEquals(TAG, partialQueryResult.getTag());
-            assertEquals(mapper.readTree(RESULT), partialQueryResult.getResult());
+            assertPartialQueryResult(partialQueryResult);
         }
 
         @ParameterizedTest
@@ -89,9 +85,7 @@ public class TranslatorTest {
             PartialQueryResult partialQueryResult = translator.partiallyDeserialize(mapper.readTree(JSON_STRING));
 
             //then
-            assertEquals(RESULT_TYPE, partialQueryResult.getType());
-            assertEquals(TAG, partialQueryResult.getTag());
-            assertEquals(mapper.readTree(RESULT), partialQueryResult.getResult());
+            assertPartialQueryResult(partialQueryResult);
         }
 
         @ParameterizedTest
@@ -104,9 +98,7 @@ public class TranslatorTest {
             PartialQueryResult partialQueryResult = translator.partiallyDeserialize(TAG, mapper.readTree(METRIC));
 
             //then
-            assertEquals(RESULT_TYPE, partialQueryResult.getType());
-            assertEquals(TAG, partialQueryResult.getTag());
-            assertEquals(mapper.readTree(RESULT), partialQueryResult.getResult());
+            assertPartialQueryResult(partialQueryResult);
         }
 
         @ParameterizedTest
@@ -119,8 +111,7 @@ public class TranslatorTest {
             AbstractQueryResult abstractQueryResult = translator.parseResult(JSON_STRING);
 
             //then
-            assertEquals(RESULT_TYPE, abstractQueryResult.getType());
-            assertEquals(TAG, abstractQueryResult.getTag());
+            assertAbstractQueryResult(abstractQueryResult);
         }
 
         @ParameterizedTest
@@ -134,8 +125,7 @@ public class TranslatorTest {
             AbstractQueryResult abstractQueryResult = translator.parseResult(rawQueryResult);
 
             //then
-            assertEquals(RESULT_TYPE, abstractQueryResult.getType());
-            assertEquals(TAG, abstractQueryResult.getTag());
+            assertAbstractQueryResult(abstractQueryResult);
         }
 
         @ParameterizedTest
@@ -149,6 +139,16 @@ public class TranslatorTest {
             AbstractQueryResult abstractQueryResult = translator.parseResult(partialQueryResult);
 
             //then
+            assertAbstractQueryResult(abstractQueryResult);
+        }
+
+        private void assertPartialQueryResult(PartialQueryResult partialQueryResult) throws JsonProcessingException {
+            assertEquals(RESULT_TYPE, partialQueryResult.getType());
+            assertEquals(TAG, partialQueryResult.getTag());
+            assertEquals(mapper.readTree(RESULT), partialQueryResult.getResult());
+        }
+
+        private void assertAbstractQueryResult(AbstractQueryResult abstractQueryResult) {
             assertEquals(RESULT_TYPE, abstractQueryResult.getType());
             assertEquals(TAG, abstractQueryResult.getTag());
         }
