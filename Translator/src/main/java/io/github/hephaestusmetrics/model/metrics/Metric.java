@@ -12,6 +12,9 @@ public class Metric {
     public final double timestamp;
     public final String valueString;
     public final Double value;
+    public final String name;
+
+    private static final String NAME_PARAM = "__name__";
 
     public Metric(String queryTag, ResultType resultType, Map<String, String> labels, double timestamp, String valueString) {
         this.queryTag = queryTag;
@@ -20,6 +23,8 @@ public class Metric {
         this.timestamp = timestamp;
         this.valueString = valueString;
         this.value = parseOrNull(valueString);
+        this.name = labels.getOrDefault(NAME_PARAM, null);
+
     }
 
     public Metric(String queryTag, ResultType resultType, Map<String, String> labels, double timestamp, Double value) {
@@ -29,6 +34,7 @@ public class Metric {
         this.timestamp = timestamp;
         this.valueString = value.toString();
         this.value = value;
+        this.name = labels.getOrDefault(NAME_PARAM, null);
     }
 
     private static Double parseOrNull(String s) {
@@ -61,6 +67,10 @@ public class Metric {
 
     public String getValueString() {
         return valueString;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }
