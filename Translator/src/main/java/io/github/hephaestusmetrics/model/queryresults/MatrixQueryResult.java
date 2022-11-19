@@ -33,4 +33,9 @@ public class MatrixQueryResult extends AbstractQueryResult {
         return metrics.size();
     }
 
+    @Override
+    public List<Metric> getMetrics() {
+        return getAllFlattened();
+    }
+
 }

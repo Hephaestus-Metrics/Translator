@@ -26,4 +26,9 @@ public class VectorQueryResult extends AbstractQueryResult {
         return metrics.size();
     }
 
+    @Override
+    public List<Metric> getMetrics() {
+        return getAll();
+    }
+
 }
