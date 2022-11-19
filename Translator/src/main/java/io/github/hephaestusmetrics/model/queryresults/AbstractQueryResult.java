@@ -1,6 +1,9 @@
 package io.github.hephaestusmetrics.model.queryresults;
 
 import io.github.hephaestusmetrics.model.ResultType;
+import io.github.hephaestusmetrics.model.metrics.Metric;
+
+import java.util.List;
 
 /**
  * Most generic class for metrics
@@ -14,6 +17,8 @@ public abstract class AbstractQueryResult {
         this.type = type;
         this.tag = tag;
     }
+
+    public abstract List<Metric> getMetrics();
 
     public ResultType getType() {
         return type;

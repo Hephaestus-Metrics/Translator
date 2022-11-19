@@ -2,7 +2,11 @@ package io.github.hephaestusmetrics.serialization.model;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import io.github.hephaestusmetrics.model.ResultType;
+import io.github.hephaestusmetrics.model.metrics.Metric;
 import io.github.hephaestusmetrics.model.queryresults.AbstractQueryResult;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Partially parsed query result
@@ -18,6 +22,11 @@ public class PartialQueryResult extends AbstractQueryResult {
 
     public ArrayNode getResult() {
         return result;
+    }
+
+    @Override
+    public List<Metric> getMetrics() {
+        return List.of();
     }
 
 }

@@ -3,6 +3,8 @@ package io.github.hephaestusmetrics.model.queryresults;
 import io.github.hephaestusmetrics.model.ResultType;
 import io.github.hephaestusmetrics.model.metrics.Metric;
 
+import java.util.List;
+
 public class StringQueryResult extends AbstractQueryResult {
 
     private final Metric metric;
@@ -16,4 +18,8 @@ public class StringQueryResult extends AbstractQueryResult {
         return metric;
     }
 
+    @Override
+    public List<Metric> getMetrics() {
+        return List.of(get());
+    }
 }
