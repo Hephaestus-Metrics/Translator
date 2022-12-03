@@ -25,7 +25,7 @@ public class ScalarQueryResultTest {
         assertEquals(stringValue, scalarQueryResult.get().getValueString());
         assertEquals(Double.parseDouble(stringValue), scalarQueryResult.get().getValue());
         assertEquals(ResultType.SCALAR, scalarQueryResult.get().getResultType());
-        assertNull(scalarQueryResult.get().getLabels());
+        assertEquals(0, scalarQueryResult.get().getLabels().size());
     }
 
     @Test
@@ -43,6 +43,6 @@ public class ScalarQueryResultTest {
         assertEquals(doubleValue.toString(), scalarQueryResult.get().getValueString());
         assertEquals(doubleValue, scalarQueryResult.get().getValue());
         assertEquals(ResultType.SCALAR, scalarQueryResult.get().getResultType());
-        assertNull(scalarQueryResult.get().getLabels());
+        assertEquals(0, scalarQueryResult.get().getLabels().size());
     }
 }
