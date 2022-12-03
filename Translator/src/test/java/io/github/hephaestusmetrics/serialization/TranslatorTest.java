@@ -209,7 +209,7 @@ public class TranslatorTest {
             assertEquals(TAG, scalarQueryResult.getTag());
             assertEquals(RESULT_TYPE, scalarQueryResult.get().getResultType());
             assertEquals(TAG, scalarQueryResult.get().getQueryTag());
-            assertNull(scalarQueryResult.get().getLabels());
+            assertEquals(0, scalarQueryResult.get().getLabels().size());
             assertEquals(Double.parseDouble(TIMESTAMP1), scalarQueryResult.get().getTimestamp());
             assertEquals(Double.parseDouble(VALUE1), scalarQueryResult.get().getValue());
             assertEquals(VALUE1, scalarQueryResult.get().getValueString());
@@ -262,7 +262,7 @@ public class TranslatorTest {
             assertEquals(TAG, stringQueryResult.getTag());
             assertEquals(RESULT_TYPE, stringQueryResult.get().getResultType());
             assertEquals(TAG, stringQueryResult.get().getQueryTag());
-            assertNull(stringQueryResult.get().getLabels());
+            assertEquals(0, stringQueryResult.get().getLabels().size());
             assertEquals(Double.parseDouble(TIMESTAMP1), stringQueryResult.get().getTimestamp());
             assertEquals(Double.parseDouble(VALUE1), stringQueryResult.get().getValue());
             assertEquals(VALUE1, stringQueryResult.get().getValueString());

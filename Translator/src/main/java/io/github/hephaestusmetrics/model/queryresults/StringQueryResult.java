@@ -3,6 +3,7 @@ package io.github.hephaestusmetrics.model.queryresults;
 import io.github.hephaestusmetrics.model.ResultType;
 import io.github.hephaestusmetrics.model.metrics.Metric;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class StringQueryResult extends AbstractQueryResult {
@@ -11,7 +12,7 @@ public class StringQueryResult extends AbstractQueryResult {
 
     public StringQueryResult(String tag, double timestamp, String valueString) {
         super(ResultType.STRING, tag);
-        this.metric = new Metric(tag, ResultType.STRING, null, timestamp, valueString);
+        this.metric = new Metric(tag, ResultType.STRING, new HashMap<>(), timestamp, valueString);
     }
 
     public Metric get() {

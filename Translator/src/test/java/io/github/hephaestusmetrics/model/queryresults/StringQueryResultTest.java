@@ -23,6 +23,6 @@ public class StringQueryResultTest {
         assertEquals(stringValue, stringQueryResult.get().getValueString());
         assertEquals(Double.parseDouble(stringValue), stringQueryResult.get().getValue());
         assertEquals(ResultType.STRING, stringQueryResult.get().getResultType());
-        assertNull(stringQueryResult.get().getLabels());
+        assertEquals(0, stringQueryResult.get().getLabels().size());
     }
 }
