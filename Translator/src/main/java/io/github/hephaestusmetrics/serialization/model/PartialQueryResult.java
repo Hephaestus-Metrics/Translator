@@ -5,7 +5,6 @@ import io.github.hephaestusmetrics.model.ResultType;
 import io.github.hephaestusmetrics.model.metrics.Metric;
 import io.github.hephaestusmetrics.model.queryresults.AbstractQueryResult;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -15,11 +14,23 @@ public class PartialQueryResult extends AbstractQueryResult {
 
     private final ArrayNode result;
 
+    /**
+     * Instantiates a new Partial query result.
+     *
+     * @param tag    the tag
+     * @param type   the type
+     * @param result the result
+     */
     public PartialQueryResult(String tag, ResultType type, ArrayNode result) {
         super(type, tag);
         this.result = result;
     }
 
+    /**
+     * Gets result.
+     *
+     * @return the result
+     */
     public ArrayNode getResult() {
         return result;
     }

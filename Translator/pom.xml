@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
     <groupId>io.github.hephaestus-metrics</groupId>
     <artifactId>translator</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>1.0</version>
 
     <name>Hephaestus metrics</name>
     <description>A library for accessing metrics collected by Prometheus</description>
@@ -77,20 +77,23 @@
                             </execution>
                         </executions>
                     </plugin>
-<!--                    Java doc plugin is temporarily disabled while we don't have javadocs -->
-<!--                    <plugin>-->
-<!--                        <groupId>org.apache.maven.plugins</groupId>-->
-<!--                        <artifactId>maven-javadoc-plugin</artifactId>-->
-<!--                        <version>2.9.1</version>-->
-<!--                        <executions>-->
-<!--                            <execution>-->
-<!--                                <id>attach-javadocs</id>-->
-<!--                                <goals>-->
-<!--                                    <goal>jar</goal>-->
-<!--                                </goals>-->
-<!--                            </execution>-->
-<!--                        </executions>-->
-<!--                    </plugin>-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <configuration>
+                            <sourcepath>src/main/java</sourcepath>
+                            <source>11</source>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
@@ -159,7 +162,8 @@
 
     <!-- Disabled due to issues with kie workbench -->
     <!-- uncomment before calling mvn deploy to deploy to central repository -->
-    <!-- <distributionManagement>
+    <!-- Deploying may require the workaround described here: https://issues.sonatype.org/browse/OSSRH-66257 -->
+    <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
             <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
@@ -168,6 +172,6 @@
             <id>ossrh</id>
             <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
-    </distributionManagement> -->
+    </distributionManagement>
 
 </project>
