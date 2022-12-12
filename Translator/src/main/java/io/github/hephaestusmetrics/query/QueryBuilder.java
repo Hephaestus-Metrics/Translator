@@ -5,15 +5,27 @@ import io.github.hephaestusmetrics.model.QueryInfo;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Query builder.
+ */
 public class QueryBuilder {
 
     private final String[][] metrics;
     private final List<String> queries;
+
+    /**
+     * Instantiates a new Query builder.
+     *
+     * @param metrics the metrics
+     */
     public QueryBuilder(String[][] metrics) {
         this.queries = new ArrayList<>();
         this.metrics = metrics;
     }
 
+    /**
+     * Build queries.
+     */
     public void buildQueries() {
         for(String[] metric: this.metrics) {
             StringBuilder sb = new StringBuilder();
@@ -33,6 +45,11 @@ public class QueryBuilder {
         }
     }
 
+    /**
+     * Gets queries.
+     *
+     * @return the queries
+     */
     public QueryInfo getQueries() {
         return new QueryInfo(this.queries);
     }

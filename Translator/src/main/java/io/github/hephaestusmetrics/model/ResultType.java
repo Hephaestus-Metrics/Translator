@@ -1,11 +1,32 @@
 package io.github.hephaestusmetrics.model;
 
+/**
+ * The enum Result type.
+ */
 public enum ResultType {
+    /**
+     * Vector result type.
+     */
     VECTOR,
+    /**
+     * Matrix result type.
+     */
     MATRIX,
+    /**
+     * String result type.
+     */
     STRING,
+    /**
+     * Scalar result type.
+     */
     SCALAR;
 
+    /**
+     * From string result type.
+     *
+     * @param s the s
+     * @return the result type
+     */
     public static ResultType fromString(String s) {
         if (s.equalsIgnoreCase("string")) {
             return STRING;

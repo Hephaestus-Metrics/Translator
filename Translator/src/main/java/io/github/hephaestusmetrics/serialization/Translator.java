@@ -11,26 +11,54 @@ import io.github.hephaestusmetrics.serialization.model.PartialQueryResult;
 
 import java.util.*;
 
+/**
+ * The type Translator.
+ */
 public class Translator {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     * Partially deserialize partial query result.
+     *
+     * @param rawMetricString the raw metric string
+     * @return the partial query result
+     */
     public PartialQueryResult partiallyDeserialize(String rawMetricString) {
         JsonNode tree = readTree(rawMetricString);
         return partiallyDeserialize(tree);
     }
 
+    /**
+     * Partially deserialize partial query result.
+     *
+     * @param rawQueryResult the raw query result
+     * @return the partial query result
+     */
     public PartialQueryResult partiallyDeserialize(RawQueryResult rawQueryResult) {
         JsonNode tree = readTree(rawQueryResult.getMetric());
         return partiallyDeserialize(rawQueryResult.getTag(), tree);
     }
 
+    /**
+     * Partially deserialize partial query result.
+     *
+     * @param rawMetricTree the raw metric tree
+     * @return the partial query result
+     */
     public PartialQueryResult partiallyDeserialize(JsonNode rawMetricTree) {
         String tag = rawMetricTree.get("tag").asText();
         JsonNode metric = rawMetricTree.get("metric");
         return partiallyDeserialize(tag, metric);
     }
 
+    /**
+     * Partially deserialize partial query result.
+     *
+     * @param tag  the tag
+     * @param tree the tree
+     * @return the partial query result
+     */
     public PartialQueryResult partiallyDeserialize(String tag, JsonNode tree) {
         JsonNode data = tree.get("data");
         ResultType resultType = ResultType.fromString(data.get("resultType").asText());
@@ -38,16 +66,34 @@ public class Translator {
         return new PartialQueryResult(tag, resultType, result);
     }
 
+    /**
+     * Parse result abstract query result.
+     *
+     * @param rawMetricString the raw metric string
+     * @return the abstract query result
+     */
     public AbstractQueryResult parseResult(String rawMetricString) {
        PartialQueryResult partial = partiallyDeserialize(rawMetricString);
        return parseResult(partial);
     }
 
+    /**
+     * Parse result abstract query result.
+     *
+     * @param rawQueryResult the raw query result
+     * @return the abstract query result
+     */
     public AbstractQueryResult parseResult(RawQueryResult rawQueryResult) {
         PartialQueryResult partial = partiallyDeserialize(rawQueryResult);
         return parseResult(partial);
     }
 
+    /**
+     * Parse result abstract query result.
+     *
+     * @param partial the partial
+     * @return the abstract query result
+     */
     public AbstractQueryResult parseResult(PartialQueryResult partial) {
         if (partial.getType() == ResultType.STRING) {
             return parseStringResult(partial);
@@ -62,16 +108,34 @@ public class Translator {
         }
     }
 
+    /**
+     * Parse string result string query result.
+     *
+     * @param rawMetricString the raw metric string
+     * @return the string query result
+     */
     public StringQueryResult parseStringResult(String rawMetricString) {
         PartialQueryResult partial = partiallyDeserialize(rawMetricString);
         return parseStringResult(partial);
     }
 
+    /**
+     * Parse string result string query result.
+     *
+     * @param rawQueryResult the raw query result
+     * @return the string query result
+     */
     public StringQueryResult parseStringResult(RawQueryResult rawQueryResult) {
         PartialQueryResult partial = partiallyDeserialize(rawQueryResult);
         return parseStringResult(partial);
     }
 
+    /**
+     * Parse string result string query result.
+     *
+     * @param partial the partial
+     * @return the string query result
+     */
     public StringQueryResult parseStringResult(PartialQueryResult partial) {
         return new StringQueryResult(
                 partial.getTag(),
@@ -79,16 +143,34 @@ public class Translator {
                 partial.getResult().get(1).asText());
     }
 
+    /**
+     * Parse scalar result scalar query result.
+     *
+     * @param rawMetricString the raw metric string
+     * @return the scalar query result
+     */
     public ScalarQueryResult parseScalarResult(String rawMetricString) {
         PartialQueryResult partial = partiallyDeserialize(rawMetricString);
         return parseScalarResult(partial);
     }
 
+    /**
+     * Parse scalar result scalar query result.
+     *
+     * @param rawQueryResult the raw query result
+     * @return the scalar query result
+     */
     public ScalarQueryResult parseScalarResult(RawQueryResult rawQueryResult) {
         PartialQueryResult partial = partiallyDeserialize(rawQueryResult);
         return parseScalarResult(partial);
     }
 
+    /**
+     * Parse scalar result scalar query result.
+     *
+     * @param partial the partial
+     * @return the scalar query result
+     */
     public ScalarQueryResult parseScalarResult(PartialQueryResult partial) {
         return new ScalarQueryResult(
                 partial.getTag(),
@@ -96,16 +178,34 @@ public class Translator {
                 partial.getResult().get(1).asText());
     }
 
+    /**
+     * Parse vector result vector query result.
+     *
+     * @param rawMetricString the raw metric string
+     * @return the vector query result
+     */
     public VectorQueryResult parseVectorResult(String rawMetricString) {
         PartialQueryResult partial = partiallyDeserialize(rawMetricString);
         return parseVectorResult(partial);
     }
 
+    /**
+     * Parse vector result vector query result.
+     *
+     * @param rawQueryResult the raw query result
+     * @return the vector query result
+     */
     public VectorQueryResult parseVectorResult(RawQueryResult rawQueryResult) {
         PartialQueryResult partial = partiallyDeserialize(rawQueryResult);
         return parseVectorResult(partial);
     }
 
+    /**
+     * Parse vector result vector query result.
+     *
+     * @param partial the partial
+     * @return the vector query result
+     */
     public VectorQueryResult parseVectorResult(PartialQueryResult partial) {
         List<Metric> parsedValues = new LinkedList<>();
         for (JsonNode node : partial.getResult()) {
@@ -121,16 +221,34 @@ public class Translator {
         return new VectorQueryResult(partial.getTag(), parsedValues);
     }
 
+    /**
+     * Parse matrix result matrix query result.
+     *
+     * @param rawMetricString the raw metric string
+     * @return the matrix query result
+     */
     public MatrixQueryResult parseMatrixResult(String rawMetricString) {
         PartialQueryResult partial = partiallyDeserialize(rawMetricString);
         return parseMatrixResult(partial);
     }
 
+    /**
+     * Parse matrix result matrix query result.
+     *
+     * @param rawQueryResult the raw query result
+     * @return the matrix query result
+     */
     public MatrixQueryResult parseMatrixResult(RawQueryResult rawQueryResult) {
         PartialQueryResult partial = partiallyDeserialize(rawQueryResult);
         return parseMatrixResult(partial);
     }
 
+    /**
+     * Parse matrix result matrix query result.
+     *
+     * @param partial the partial
+     * @return the matrix query result
+     */
     public MatrixQueryResult parseMatrixResult(PartialQueryResult partial) {
         List<List<Metric>> parsedValues = new LinkedList<>();
         for (JsonNode node : partial.getResult()) {

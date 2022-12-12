@@ -1,13 +1,19 @@
 package io.github.hephaestusmetrics.model.utilities;
 
 /**
- * Converts [ <unix_time>, "<sample_value>" ] from string to doubles
+ * Value converter
  */
 public final class ValueConverter {
 
     private ValueConverter() {
     }
 
+    /**
+     * Convert double [ ].
+     *
+     * @param valueString the value string
+     * @return the double [ ]
+     */
     public static double[] convert(String[] valueString) {
         double timestamp;
         double value;
