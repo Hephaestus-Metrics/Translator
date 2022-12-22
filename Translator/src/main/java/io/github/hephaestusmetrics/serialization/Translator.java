@@ -273,7 +273,6 @@ public class Translator {
         try {
             return objectMapper.readTree(json);
         } catch (JsonProcessingException e) {
-            // TODO use custom unchecked parse exception
             throw new RuntimeException(e);
         }
     }
